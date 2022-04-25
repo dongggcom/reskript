@@ -1,10 +1,20 @@
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import injectHtml, {InjectHtmlOptions} from '@reskript/plugin-inject-html';
 import {configure} from '@reskript/settings';
-import ExtraScriptPlugin from '@reskript/webpack-plugin-extra-script';
 import qiankun from '@reskript/plugin-qiankun';
 
-const EXTERNAL_NONE = 'https://code.bdstatic.com/npm/none@1.0.0/dist/none.min.js';
+const injectOptions: InjectHtmlOptions = {
+    headStart: [
+        {
+            tag: 'script',
+            attributes: {
+                async: true,
+                src: 'https://code.bdstatic.com/npm/none@1.0.0/dist/none.min.js',
+            },
+        },
+    ],
+};
 
 export default configure(
     'webpack',
@@ -23,6 +33,7 @@ export default configure(
         build: {
             appTitle: 'TodoMVC - reSKRipt',
             favicon: path.join(path.dirname(fileURLToPath(import.meta.url)), 'favicon.ico'),
+            appContainerId: 'root',
             uses: ['antd', 'styled-components', 'tailwind'],
             script: {
                 polyfill: false,
@@ -31,9 +42,13 @@ export default configure(
                 resources: [
                     path.join(path.dirname(fileURLToPath(import.meta.url)), 'src', 'styles', 'inject.less'),
                 ],
+                lessVariables: {
+                    '@app-primary-color': '#1890ff',
+                    '@app-primary-color-active': '#40a9ff',
+                    '@app-primary-color-hover': '#096dd9',
+                },
             },
             finalize: webpackConfig => {
-                webpackConfig.plugins.push(new ExtraScriptPlugin({async: true, src: EXTERNAL_NONE}, {prepend: true}));
                 webpackConfig.optimization.splitChunks = {
                     cacheGroups: {
                         vendors: {
@@ -61,6 +76,7 @@ export default configure(
             },
         },
         plugins: commandName => [
+            injectHtml(injectOptions),
             commandName !== 'play' && qiankun('TodoMVC'),
         ],
     }

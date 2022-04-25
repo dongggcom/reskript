@@ -1,12 +1,11 @@
 import {TransformOptions} from '@babel/core';
 import {BuildEntry} from './shared.js';
 import {WebpackFinalize} from './webpack.js';
+import {ViteFinalize} from './vite.js';
 
 export type ThirdPartyUse = 'antd' | 'lodash' | 'styled-components' | 'emotion' | 'reflect-metadata' | 'tailwind';
 
-export interface BuildStyleSettings {
-    // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题
-    readonly extract: boolean;
+export interface BuildStyleSettingsBase {
     // 用于编译LESS的变量资源文件列表。每个文件均会被注入到所有的LESS文件前面，作为全局可用的资源
     readonly resources: string[];
     // 额外的LESS变量，以对象的形式提供，用于less的modifyVars配置
@@ -14,6 +13,13 @@ export interface BuildStyleSettings {
     // 启用CSS Modules，默认为true。为true对非第三方代码启用，为false则全面禁用，为函数则通过文件路径自主判断
     readonly modules: boolean | ((resoruce: string) => boolean);
 }
+
+export interface WebpackBuildStyleSettings extends BuildStyleSettingsBase {
+    // 是否将CSS抽取到独立的.css文件中，默认为false，打开这个配置可能导致CSS顺序有问题
+    readonly extract: boolean;
+}
+
+export type ViteBuildStyleSettings = BuildStyleSettingsBase;
 
 export interface BuildScriptSettings {
     // 经过babel处理的文件，默认为true。为true对非第三方代码启用，为false则全面禁用，为函数则通过文件路径自主判断
@@ -72,12 +78,25 @@ export interface BuildSettings {
     readonly favicon?: string;
     // 在HTML中增加一个放应用的`<div>`元素，`id`属性由这个配置指定。如果不配置，就不会自动增加这元素。自定义HTML模板时这个配置失效
     readonly appContainerId?: string;
+    readonly transformEntryHtml: (html: string) => string;
     // 构建过程中需要排除的Feature名称，默认排除'dev'，其它均会被构建
     readonly excludeFeatures: string[];
-    readonly style: BuildStyleSettings;
+    // 脚本（js/ts）相关配置
     readonly script: BuildScriptSettings;
-    // 最终手动处理webpack配置
-    readonly finalize: WebpackFinalize;
     // 配置对最终产出的检查规则
     readonly inspect: BuildInspectSettings;
+}
+
+export interface WebpackBuildSettings extends BuildSettings {
+    // 最终手动处理webpack配置
+    readonly finalize: WebpackFinalize;
+    // 样式相关配置
+    readonly style: WebpackBuildStyleSettings;
+}
+
+export interface ViteBuildSettings extends BuildSettings {
+    // 最终手动处理vite配置
+    readonly finalize: ViteFinalize;
+    // 样式相关配置
+    readonly style: ViteBuildStyleSettings;
 }

@@ -53,12 +53,14 @@ module.exports = {
                 'advanced/browsers-list',
                 'advanced/web-worker',
                 'advanced/debug-component',
+                'advanced/vite-enhanced',
             ],
         },
         {
             type: 'category',
             label: '插件',
             items: [
+                'plugins/inject-html',
                 'plugins/sass',
                 'plugins/qiankun',
                 'plugins/workspace-no-build',
@@ -71,6 +73,7 @@ module.exports = {
                 'migration/v2',
                 'migration/v3',
                 'migration/v4',
+                'migration/v5',
             ],
         },
         'faq',

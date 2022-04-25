@@ -9,8 +9,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "lint": "lerna run --parallel lint",
-    "test": "lerna run --concurrency=1 --no-bail test || exit 0",
+    "lint": "lerna run --no-bail lint",
+    "test": "lerna run --concurrency=1 test",
     "build": "lerna run build",
     "build-clean": "lerna run --parallel clean && npm run build",
     "release": "lerna version --conventional-commits --no-push --force-publish",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "@commitlint/cli": "^16.0.2",
     "@commitlint/config-conventional": "^16.0.0",
-    "cpy": "^8.1.2",
+    "cpy": "^9.0.0",
     "husky": "^7.0.4",
     "lerna": "^4.0.0",
     "semver": "^7.3.5",

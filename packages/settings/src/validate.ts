@@ -62,8 +62,8 @@ const optionalRuleConfig = (valueSchema: any) => {
 // `schema`并不是一个完全符合JSON Schema的东西
 const schema: any = {
     properties: {
-        provider: {
-            enum: ['webpack'],
+        driver: {
+            enum: ['webpack', 'vite'],
             type: 'string',
         },
         featureMatrix: {
@@ -108,6 +108,9 @@ const schema: any = {
                 },
                 publicPath: {
                     type: 'string',
+                },
+                transformEntryHtml: {
+                    instanceof: 'Function',
                 },
                 finalize: {
                     instanceof: 'Function',
@@ -203,32 +206,28 @@ const schema: any = {
                     type: 'boolean',
                 },
                 https: {
-                    anyOf: [
-                        {
-                            properties: {
-                                proxy: {
-                                    type: 'boolean',
-                                },
-                                client: {
-                                    type: 'boolean',
-                                },
-                                serverOptions: {
-                                    type: 'object',
-                                },
-                            },
-                            additionalProperties: false,
-                            type: 'object',
-                        },
-                        {
+                    properties: {
+                        proxy: {
                             type: 'boolean',
                         },
-                    ],
+                        client: {
+                            type: 'boolean',
+                        },
+                        serverOptions: {
+                            type: 'object',
+                        },
+                    },
+                    additionalProperties: false,
+                    type: 'object',
                 },
                 openPage: {
                     type: 'string',
                 },
                 port: {
                     type: 'number',
+                },
+                customizeMiddleware: {
+                    instanceof: 'Function',
                 },
                 finalize: {
                     instanceof: 'Function',
@@ -244,6 +243,15 @@ const schema: any = {
                 },
                 defaultGlobalSetup: {
                     type: 'string',
+                },
+            },
+            additionalProperties: false,
+            type: 'object',
+        },
+        portal: {
+            properties: {
+                setup: {
+                    instanceof: 'Function',
                 },
             },
             additionalProperties: false,
@@ -268,5 +276,5 @@ const schema: any = {
 };
 
 export default (value: any): void => {
-    validate(schema, value, {name: 'Your reskript.config.js'});
+    validate(schema, value, {name: 'Your reSKRipt config'});
 };

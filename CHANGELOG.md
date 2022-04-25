@@ -3,6 +3,178 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/ecomfe/reskript/compare/v5.1.0...v5.2.0) (2022-03-14)
+
+
+### Bug Fixes
+
+* **build:** 修复*.var.less未自动注入的问题 ([#279](https://github.com/ecomfe/reskript/issues/279)) ([65db818](https://github.com/ecomfe/reskript/commit/65db818545b8366450612a48abbf14201f9ea6c2))
+
+
+### Features
+
+* **init:** 初始化模板支持选择Vite引擎 ([#280](https://github.com/ecomfe/reskript/issues/280)) ([905bbec](https://github.com/ecomfe/reskript/commit/905bbec692db3ae04b00dbbfbf3560f6113ac30d))
+
+
+
+
+
+# [5.1.0](https://github.com/ecomfe/reskript/compare/v5.0.0...v5.1.0) (2022-03-11)
+
+
+### Bug Fixes
+
+* **build:** 修复对core-js的预处理逻辑 ([#277](https://github.com/ecomfe/reskript/issues/277)) ([f82c6a0](https://github.com/ecomfe/reskript/commit/f82c6a0b5a15516be149104c62177b1fd22e169c))
+* **build:** 找回Webpack的入口配置下的html导出 ([#278](https://github.com/ecomfe/reskript/issues/278)) ([303668e](https://github.com/ecomfe/reskript/commit/303668e238b053825efcc873d4939f65ca67e463))
+
+
+### Features
+
+* **doctor:** 增加V5迁移检查 ([c06a1f8](https://github.com/ecomfe/reskript/commit/c06a1f8fb47e9ce0f37508ba8947c29bdb6b748d))
+
+
+
+
+
+# [5.0.0](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.1...v5.0.0) (2022-03-10)
+
+
+### Bug Fixes
+
+* **config-vite:** 修复调用core-js-compat的错误 ([72e0b3b](https://github.com/ecomfe/reskript/commit/72e0b3bb4e0dc2ece71e65d1213184a6aff286d5))
+* **settings:** 优化vite引擎下的build.finalize类型 ([131d6fb](https://github.com/ecomfe/reskript/commit/131d6fbd2fa5ee16aac99d88ca6cf39a6601daed))
+
+
+
+
+
+# [5.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.0...v5.0.0-beta.1) (2022-03-10)
+
+
+### Features
+
+* **plugin-inject-html:** 支持plugin-inject-plugin仅在指定的命令下启用 ([9e9ab97](https://github.com/ecomfe/reskript/commit/9e9ab97358ad0339d76d54d8c5ab1b8c30492774))
+* **plugin-utils:** 增加插件相关的工具包 ([#275](https://github.com/ecomfe/reskript/issues/275)) ([5b82848](https://github.com/ecomfe/reskript/commit/5b828489c2ee96a612f8faecfb18a4d34fb14228))
+
+
+### Performance Improvements
+
+* **build:** 预处理antd和core-js的打包 ([0559a6e](https://github.com/ecomfe/reskript/commit/0559a6e42b3c50fc3445cb91224a531c25d9c31d))
+
+
+
+
+
+# [5.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v4.3.0...v5.0.0-beta.0) (2022-03-03)
+
+
+### Code Refactoring
+
+* 移除less-safe-loader ([e38994b](https://github.com/ecomfe/reskript/commit/e38994b637971fc1c4e014fbb38f0a5e407cfe66))
+
+
+### Features
+
+* **build:** 在Vite引擎中支持publicPath ([#200](https://github.com/ecomfe/reskript/issues/200)) ([c4da054](https://github.com/ecomfe/reskript/commit/c4da054ed4e2a3c704c2d54dc3777801b343167e))
+* **build:** 支持Vite的build命令 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([4294acf](https://github.com/ecomfe/reskript/commit/4294acf3da0346760313d1a89db3ca4fb93c45c8))
+* **build:** 支持Vite的finalize配置 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([33ab5b6](https://github.com/ecomfe/reskript/commit/33ab5b65fa91b4843e1c5a5b488054796ed8d830))
+* **build:** 支持Vite的service worker生成 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([47600c0](https://github.com/ecomfe/reskript/commit/47600c0cb20276bf72e4d81be7071929816c6d1f))
+* **build:** 支持双引擎的HTML修改功能 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([41d9521](https://github.com/ecomfe/reskript/commit/41d9521225ff4b5bcb43614d82f9eec87bcd638d))
+* **config-vite:** 增加css相关的处理插件 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([3e0e65b](https://github.com/ecomfe/reskript/commit/3e0e65b75c72d3fa308563595254248f5848e392))
+* **config-vite:** 实现SVG转React组件的插件 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([056c06a](https://github.com/ecomfe/reskript/commit/056c06aaf799ad76ca2271c990411d18786ad3b4))
+* **dev:** 在Vite引擎中支持customizeMiddleware ([#200](https://github.com/ecomfe/reskript/issues/200)) ([f023a42](https://github.com/ecomfe/reskript/commit/f023a42b47bc41bcd6e0af7c3b3c2df2dcec5e2f))
+* **dev:** 实现Vite的dev基础功能 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([2e46749](https://github.com/ecomfe/reskript/commit/2e46749180f47810abf9171d74d0b85820d98d55))
+* **play:** 支持Vite引擎的play功能 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([bb7e629](https://github.com/ecomfe/reskript/commit/bb7e62936582c62098e3bea31ee93f286eaa81a6))
+* **portal:** 实现portal模块 ([#266](https://github.com/ecomfe/reskript/issues/266)) ([2e765dc](https://github.com/ecomfe/reskript/commit/2e765dc84f7d9224b317c73bb5ceb9576a28b779))
+* **settings:** 增加一个customizeMiddlewares优化配置中间件 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([2e458c8](https://github.com/ecomfe/reskript/commit/2e458c8db75d50df9383a7dfc56e9e841461e983))
+* 使用query引入worker ([#200](https://github.com/ecomfe/reskript/issues/200)) ([ed5efd4](https://github.com/ecomfe/reskript/commit/ed5efd46a67672b14919b84fa4ea9805afd326c2))
+* 实现Vite样式相关的配置 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([ee7bab0](https://github.com/ecomfe/reskript/commit/ee7bab0c127d153ebc158e41f6be6921e108c619))
+* 自动生成入口HTML的插件 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([a1efd94](https://github.com/ecomfe/reskript/commit/a1efd94d80eda7e5758e7fb1f28c26dc104271d4))
+
+
+### BREAKING CHANGES
+
+* **build:** `@reskript/webpack-plugin-extra-script`已经废弃，使用`@reskript/plugin-inject-html`替代
+* **dev:** `@reskript/config-webpack`和`build.finalize`中的`styleResources`相关的功能已经移除，由内置的less插件实现
+* **dev:** `$features`改名为`skr.features`，`$build`改名为`skr.build`
+* **dev:** 自定义HTML模板中，只能使用`templateData.*`获取模板数据
+* **dev:** 原入口配置中的`export const html`中，用于模板数据的部分，更新为`export const templateData`
+* `@reskript/config-webpack`和`build.finalize`中不再有`lessSafe`
+* 要将文件引入为worker，需要使用`xxx?worker`的形式
+
+
+
+
+
+# [4.3.0](https://github.com/ecomfe/reskript/compare/v4.2.1...v4.3.0) (2022-03-03)
+
+
+### Bug Fixes
+
+* **test:** 不要把d.ts文件作为可执行文件处理 ([#269](https://github.com/ecomfe/reskript/issues/269)) ([047e6fc](https://github.com/ecomfe/reskript/commit/047e6fc97d9f6534be0b6baa838385c2df560fb8))
+
+
+### Features
+
+* **settings:** 提供客户端常用类型 ([#270](https://github.com/ecomfe/reskript/issues/270)) ([84994c1](https://github.com/ecomfe/reskript/commit/84994c1cf74c093b72ebde2cf1f05b6637131554))
+
+
+
+
+
+## [4.2.1](https://github.com/ecomfe/reskript/compare/v4.2.0...v4.2.1) (2022-02-25)
+
+
+### Bug Fixes
+
+* **core:** 修复Windows下异步import的问题 ([#265](https://github.com/ecomfe/reskript/issues/265)) ([e8dac12](https://github.com/ecomfe/reskript/commit/e8dac128b2fccaf23804f343f7f22b5a07b273be))
+
+
+
+
+
+# [4.2.0](https://github.com/ecomfe/reskript/compare/v4.1.2...v4.2.0) (2022-02-25)
+
+
+### Bug Fixes
+
+* init的tsconfig未包含配置文件 ([#263](https://github.com/ecomfe/reskript/issues/263)) ([d70a8a2](https://github.com/ecomfe/reskript/commit/d70a8a2d3ccb13b69446564eb77e6d67235e3761))
+* **plugin-workspace-no-build:** 修复Windows下的路径问题 ([#262](https://github.com/ecomfe/reskript/issues/262)) ([96b4968](https://github.com/ecomfe/reskript/commit/96b49684f43491b2ced61fb904554272fdec9f5f))
+* 加载.env文件顺序错误 ([#260](https://github.com/ecomfe/reskript/issues/260)) ([94be01b](https://github.com/ecomfe/reskript/commit/94be01b3a4377cf2f7fe602fb7f6d0b05ecb276b))
+
+
+### Features
+
+* **babel:** 添加react代码性能优化转换 ([#261](https://github.com/ecomfe/reskript/issues/261)) ([38252e6](https://github.com/ecomfe/reskript/commit/38252e67fb20a0352a3417ffc3078b0d52ccabe4))
+
+
+
+
+
+## [4.1.2](https://github.com/ecomfe/reskript/compare/v4.1.1...v4.1.2) (2022-02-10)
+
+
+### Bug Fixes
+
+* **build:** 转用less插件解决calc安全替换的问题 ([#258](https://github.com/ecomfe/reskript/issues/258)) ([bb23c35](https://github.com/ecomfe/reskript/commit/bb23c35e08a4d200c738106d984816079a01ea4d))
+* **settings:** 调整配置文件校验逻辑，移除devServer.https的boolean值 ([#259](https://github.com/ecomfe/reskript/issues/259)) ([b2c2a45](https://github.com/ecomfe/reskript/commit/b2c2a45a928fc6312cd66078f172dd1a9ef15abf))
+
+
+
+
+
+## [4.1.1](https://github.com/ecomfe/reskript/compare/v4.1.0...v4.1.1) (2022-02-08)
+
+
+### Bug Fixes
+
+* **init:** 修复init因加载CommonJS模块无法运行的问题 ([#255](https://github.com/ecomfe/reskript/issues/255)) ([9a15b15](https://github.com/ecomfe/reskript/commit/9a15b15fd28de26739fbb00da5288704fba1c9ea))
+* **lint:** 修复useless-memoized-hooks问题 ([#252](https://github.com/ecomfe/reskript/issues/252), [#253](https://github.com/ecomfe/reskript/issues/253)) ([06c9156](https://github.com/ecomfe/reskript/commit/06c91567ca1f9d51177666445b50d43e41f5b8f0))
+
+
+
+
+
 # [4.1.0](https://github.com/ecomfe/reskript/compare/v4.0.1...v4.1.0) (2022-02-07)
 
 

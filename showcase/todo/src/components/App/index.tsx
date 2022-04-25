@@ -1,13 +1,15 @@
-import {useState, useCallback, useEffect} from 'react';
-import {Button} from 'antd';
+import {useState, useCallback, useEffect, lazy, Suspense} from 'react';
 import styled from 'styled-components';
 import api, {TodoItem, TodoItemDraft} from '@/api/todo';
-import Create from '../Create';
+import WorkerStatus from '@/components/WorkerStatus';
 import List from '../List';
+import BatchLabel from './BatchLabel';
 import './lintIgnore';
 import c from './index.less';
 import './lintIgnore.global.css';
 import decoration from './decoration.png';
+
+const Create = lazy(() => import('../Create'));
 
 const Header = styled.h1`
     font-size: 100px;
@@ -57,13 +59,6 @@ export default function App() {
         },
         [requestList]
     );
-    const markAllDone = useCallback(
-        async () => {
-            await api.markAllDone();
-            await requestList();
-        },
-        [requestList]
-    );
     useEffect(
         () => {
             requestList();
@@ -72,14 +67,19 @@ export default function App() {
     );
 
     return (
-        <Layout id="app" className={c.root}>
+        <Layout id="app" className={c('root')}>
             <Header>
                 <Title>todos</Title>
             </Header>
-            <Create onSubmit={createNew} />
+            <Suspense fallback={<div style={{height: 64}} />}>
+                <Create onSubmit={createNew} />
+            </Suspense>
             <Meta id="app-meta" className="flex items-center justify-between">
-                {todos.length} things waiting
-                {$features.batch && <Button type="link" onClick={markAllDone}>all done</Button>}
+                <span className="flex items-center gap-1">
+                    <WorkerStatus />
+                    {todos.length} things waiting
+                </span>
+                {skr.features.batch && <BatchLabel onFinish={requestList} />}
             </Meta>
             <List dataSource={todos} onToggleItem={toggleItem} />
         </Layout>

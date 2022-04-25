@@ -1,29 +1,22 @@
 import {resolve} from '@reskript/core';
+import {lessConfig} from '@reskript/build-utils';
+import less from 'less';
 import {LoaderFactory} from '../interface.js';
 
-const factory: LoaderFactory = async ({projectSettings}) => {
-    const importing = [
+const factory: LoaderFactory = async ({cwd, srcDirectory, projectSettings}) => {
+    const {build: {style: {lessVariables, extract, resources}}} = projectSettings;
+    const resolving = [
         resolve('less-loader'),
-        import('less-plugin-npm-import'),
-        import('less-plugin-functions'),
+        lessConfig({cwd, srcDirectory, resources, variables: lessVariables}),
     ] as const;
-    const [loader, {default: NpmImport}, {default: LessPluginFunctions}] = await Promise.all(importing);
-    const {build: {style: {lessVariables, extract}}} = projectSettings;
+    const [loader, options] = await Promise.all(resolving);
 
     return {
         loader,
         options: {
+            implementation: less,
             sourceMap: extract,
-            lessOptions: {
-                math: 'always',
-                javascriptEnabled: true,
-                modifyVars: lessVariables,
-                plugins: [
-                    new NpmImport({prefix: '~'}),
-                    new LessPluginFunctions({alwaysOverride: true}),
-                ],
-                compress: false,
-            },
+            lessOptions: options,
         },
     };
 };

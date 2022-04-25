@@ -3,6 +3,101 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/ecomfe/reskript/compare/v5.1.0...v5.2.0) (2022-03-14)
+
+
+### Features
+
+* **init:** 初始化模板支持选择Vite引擎 ([#280](https://github.com/ecomfe/reskript/issues/280)) ([905bbec](https://github.com/ecomfe/reskript/commit/905bbec692db3ae04b00dbbfbf3560f6113ac30d))
+
+
+
+
+
+# [5.1.0](https://github.com/ecomfe/reskript/compare/v5.0.0...v5.1.0) (2022-03-11)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [5.0.0](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.1...v5.0.0) (2022-03-10)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [5.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.0...v5.0.0-beta.1) (2022-03-10)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [5.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v4.3.0...v5.0.0-beta.0) (2022-03-03)
+
+
+### Features
+
+* **play:** 支持Vite引擎的play功能 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([bb7e629](https://github.com/ecomfe/reskript/commit/bb7e62936582c62098e3bea31ee93f286eaa81a6))
+
+
+
+
+
+# [4.3.0](https://github.com/ecomfe/reskript/compare/v4.2.1...v4.3.0) (2022-03-03)
+
+
+### Features
+
+* **settings:** 提供客户端常用类型 ([#270](https://github.com/ecomfe/reskript/issues/270)) ([84994c1](https://github.com/ecomfe/reskript/commit/84994c1cf74c093b72ebde2cf1f05b6637131554))
+
+
+
+
+
+## [4.2.1](https://github.com/ecomfe/reskript/compare/v4.2.0...v4.2.1) (2022-02-25)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+# [4.2.0](https://github.com/ecomfe/reskript/compare/v4.1.2...v4.2.0) (2022-02-25)
+
+
+### Bug Fixes
+
+* init的tsconfig未包含配置文件 ([#263](https://github.com/ecomfe/reskript/issues/263)) ([d70a8a2](https://github.com/ecomfe/reskript/commit/d70a8a2d3ccb13b69446564eb77e6d67235e3761))
+
+
+
+
+
+## [4.1.2](https://github.com/ecomfe/reskript/compare/v4.1.1...v4.1.2) (2022-02-10)
+
+**Note:** Version bump only for package @reskript/init
+
+
+
+
+
+## [4.1.1](https://github.com/ecomfe/reskript/compare/v4.1.0...v4.1.1) (2022-02-08)
+
+
+### Bug Fixes
+
+* **init:** 修复init因加载CommonJS模块无法运行的问题 ([#255](https://github.com/ecomfe/reskript/issues/255)) ([9a15b15](https://github.com/ecomfe/reskript/commit/9a15b15fd28de26739fbb00da5288704fba1c9ea))
+
+
+
+
+
 # [4.1.0](https://github.com/ecomfe/reskript/compare/v4.0.1...v4.1.0) (2022-02-07)
 
 **Note:** Version bump only for package @reskript/init

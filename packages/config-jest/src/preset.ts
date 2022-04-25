@@ -32,16 +32,18 @@ export const getJestPresetConfig = (target: 'react' | 'node', configBasePath: st
             '@/(.*)$': '<rootDir>/src/$1',
         },
         globals: {
-            $build: {
-                mode: 'production',
-                // TODO: 现在是写死的，后续看`--test-target`参数
-                target: 'dev',
+            skr: {
+                build: {
+                    mode: 'production',
+                    // TODO: 现在是写死的，后续看`--test-target`参数
+                    target: 'dev',
+                },
+                // 如果自己有`jest.config.js`，需要自己写`skr.features`才行
+                features: options?.features ?? {},
             },
-            // 如果自己有`jest.config.js`，需要自己写`global.$features`才行
-            $features: options?.features ?? {},
         },
         moduleDirectories: ['src', 'node_modules'],
-        moduleFileExtensions: ['js', 'ts', 'jsx', 'tsx', 'd.ts'],
+        moduleFileExtensions: ['js', 'ts', 'jsx', 'tsx'],
         transform: {
             'node_modules/.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/thirdPartyTransformer`,
             '^.+\\.(js|jsx|ts|tsx)$': `${unixify(configBasePath)}/transformer`,

@@ -3,6 +3,92 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/ecomfe/reskript/compare/v5.1.0...v5.2.0) (2022-03-14)
+
+**Note:** Version bump only for package @reskript/plugin-workspace-no-build
+
+
+
+
+
+# [5.1.0](https://github.com/ecomfe/reskript/compare/v5.0.0...v5.1.0) (2022-03-11)
+
+**Note:** Version bump only for package @reskript/plugin-workspace-no-build
+
+
+
+
+
+# [5.0.0](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.1...v5.0.0) (2022-03-10)
+
+**Note:** Version bump only for package @reskript/plugin-workspace-no-build
+
+
+
+
+
+# [5.0.0-beta.1](https://github.com/ecomfe/reskript/compare/v5.0.0-beta.0...v5.0.0-beta.1) (2022-03-10)
+
+**Note:** Version bump only for package @reskript/plugin-workspace-no-build
+
+
+
+
+
+# [5.0.0-beta.0](https://github.com/ecomfe/reskript/compare/v4.3.0...v5.0.0-beta.0) (2022-03-03)
+
+
+### Features
+
+* **play:** 支持Vite引擎的play功能 ([#200](https://github.com/ecomfe/reskript/issues/200)) ([bb7e629](https://github.com/ecomfe/reskript/commit/bb7e62936582c62098e3bea31ee93f286eaa81a6))
+
+
+
+
+
+# [4.3.0](https://github.com/ecomfe/reskript/compare/v4.2.1...v4.3.0) (2022-03-03)
+
+**Note:** Version bump only for package @reskript/plugin-workspace-no-build
+
+
+
+
+
+## [4.2.1](https://github.com/ecomfe/reskript/compare/v4.2.0...v4.2.1) (2022-02-25)
+
+**Note:** Version bump only for package @reskript/plugin-workspace-no-build
+
+
+
+
+
+# [4.2.0](https://github.com/ecomfe/reskript/compare/v4.1.2...v4.2.0) (2022-02-25)
+
+
+### Bug Fixes
+
+* **plugin-workspace-no-build:** 修复Windows下的路径问题 ([#262](https://github.com/ecomfe/reskript/issues/262)) ([96b4968](https://github.com/ecomfe/reskript/commit/96b49684f43491b2ced61fb904554272fdec9f5f))
+
+
+
+
+
+## [4.1.2](https://github.com/ecomfe/reskript/compare/v4.1.1...v4.1.2) (2022-02-10)
+
+**Note:** Version bump only for package @reskript/plugin-workspace-no-build
+
+
+
+
+
+## [4.1.1](https://github.com/ecomfe/reskript/compare/v4.1.0...v4.1.1) (2022-02-08)
+
+**Note:** Version bump only for package @reskript/plugin-workspace-no-build
+
+
+
+
+
 # [4.1.0](https://github.com/ecomfe/reskript/compare/v4.0.1...v4.1.0) (2022-02-07)
 
 **Note:** Version bump only for package @reskript/plugin-workspace-no-build

@@ -1,70 +1,33 @@
-import WebpackDevServer from 'webpack-dev-server';
-import {internalIpV4} from 'internal-ip';
-import {readProjectSettings, BuildEnv, DevCommandLineArgs, strictCheckRequiredDependency} from '@reskript/settings';
-import {BuildContext, collectEntries, createRuntimeBuildEnv, EntryLocation} from '@reskript/config-webpack';
+import {BuildEnv, DevCommandLineArgs, ProjectSettings} from '@reskript/settings';
+import {BuildContext, resolveDevHost, createRuntimeBuildEnv, AppEntry} from '@reskript/build-utils';
 import {logger, readPackageConfig} from '@reskript/core';
 
-export const resolveHost = async (hostType: DevCommandLineArgs['host']) => {
-
-    if (!hostType) {
-        return 'localhost';
-    }
-
-    switch (hostType) {
-        case 'localhost':
-            return 'localhost';
-        case 'loopback':
-            return '127.0.0.1';
-        case 'ip': {
-            const ip = await internalIpV4();
-            return ip ?? 'localhost';
-        }
-        default:
-            return hostType;
-    }
-};
-
-export const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], port: number) => {
+const resolvePublicPath = async (hostType: DevCommandLineArgs['host'], port: number) => {
     if (!hostType) {
         return undefined;
     }
 
-    const host = await resolveHost(hostType);
-    return `http://${host}:${port}/assets/`;
+    const host = await resolveDevHost(hostType);
+    return `http://${host}:${port}/`;
 };
 
-export const startServer = async (server: WebpackDevServer): Promise<void> => {
-    try {
-        await server.start();
-    }
-    catch (ex) {
-        logger.error(ex instanceof Error ? ex.message : `${ex}`);
-        process.exit(22);
-    }
-};
+interface BuildContextOptions<C, S extends ProjectSettings> {
+    cmd: DevCommandLineArgs;
+    projectSettings: S;
+    entries: Array<AppEntry<C>>;
+}
 
-export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<BuildContext> => {
-    const {mode, cwd, srcDirectory, entriesDirectory, entry, buildTarget, configFile} = cmd;
-    const reading = [
-        readProjectSettings({commandName: 'dev', specifiedFile: configFile, ...cmd}),
-        readPackageConfig(cwd),
-    ] as const;
-    const [projectSettings, {name: hostPackageName}] = await Promise.all(reading);
-    await strictCheckRequiredDependency(projectSettings, cwd);
-    const entryLocation: EntryLocation = {
-        cwd: cwd,
-        srcDirectory: srcDirectory,
-        entryDirectory: entriesDirectory,
-        only: [entry],
-    };
-    const entries = await collectEntries(entryLocation);
+export const createBuildContext = async <C, S extends ProjectSettings>(options: BuildContextOptions<C, S>) => {
+    const {cmd, projectSettings, entries} = options;
+    const {mode, cwd, srcDirectory, entry, buildTarget} = cmd;
+    const {name: hostPackageName} = await readPackageConfig(cwd);
 
     if (!entries.length) {
         logger.error(`You have specified a missing entry ${entry}, dev-server is unable to start.`);
         process.exit(21);
     }
 
-    const buildEnv: BuildEnv = {
+    const buildEnv: BuildEnv<S> = {
         hostPackageName,
         cwd,
         usage: 'devServer',
@@ -80,11 +43,60 @@ export const createBuildContext = async (cmd: DevCommandLineArgs): Promise<Build
         },
     };
     const runtimeBuildEnv = await createRuntimeBuildEnv(buildEnv);
-    return {
+    const buildContext: BuildContext<C, S> = {
         ...runtimeBuildEnv,
         entries,
         features: projectSettings.featureMatrix[buildTarget],
         buildTarget: buildTarget || 'dev',
         isDefaultTarget: true,
+    };
+    return buildContext;
+};
+
+export interface ServerStartContext<C, S extends ProjectSettings> {
+    buildContext: BuildContext<C, S>;
+    host: DevCommandLineArgs['host'];
+    publicPath: string | undefined;
+}
+
+interface ServerContextOptions<C, S extends ProjectSettings> {
+    cmd: DevCommandLineArgs;
+    buildContext: BuildContext<C, S>;
+}
+
+export const prepareServerContext = async <C, S extends ProjectSettings>(options: ServerContextOptions<C, S>) => {
+    const {cmd, buildContext} = options;
+    const host = await resolveDevHost(cmd.host);
+    const publicPath = await resolvePublicPath(cmd.host, buildContext.projectSettings.devServer.port);
+    const serverContext: ServerStartContext<C, S> = {buildContext, host, publicPath};
+    return serverContext;
+};
+
+interface RestartContext {
+    inProgress: Promise<() => Promise<void>>;
+    nextStart: (() => void) | null;
+}
+
+export const restartable = (start: () => RestartContext['inProgress']) => {
+    const context: RestartContext = {
+        inProgress: start(),
+        nextStart: null,
+    };
+    return async () => {
+        logger.log('Detected reSKRipt config change, restarting dev server...');
+
+        if (context.nextStart) {
+            return;
+        }
+
+        context.nextStart = () => {
+            context.inProgress = start();
+            context.nextStart = null;
+        };
+        const stop = await context.inProgress;
+        await stop();
+        if (context.nextStart) {
+            context.nextStart();
+        }
     };
 };

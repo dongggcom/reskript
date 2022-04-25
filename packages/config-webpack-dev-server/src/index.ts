@@ -6,10 +6,12 @@ import {merge} from 'webpack-merge';
 import launchInEditor from 'launch-editor-middleware';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import {compact} from '@reskript/core';
-import {createHTMLPluginInstances, BuildContext} from '@reskript/config-webpack';
-import {BuildEntry, warnAndExitOnInvalidFinalizeReturn} from '@reskript/settings';
+import {createHtmlPluginInstances, BuildContext} from '@reskript/config-webpack';
+import {constructProxyConfiguration, createMiddlewareHook} from '@reskript/build-utils';
+import {warnAndExitOnInvalidFinalizeReturn, WebpackBuildEntry} from '@reskript/settings';
+import {createPortal, router} from '@reskript/portal';
 import ProgressBarPlugin from './ProgressBarPlugin.js';
-import {addHotModuleToEntry, constructProxyConfiguration} from './utils.js';
+import {addHotModuleToEntry} from './utils.js';
 
 const getDevServerMessages = (host: string, port: number, https: boolean, openPage: string = ''): string[] => [
     `Your application is running here: ${https ? 'https' : 'http'}://${host}:${port}/${openPage}`,
@@ -17,7 +19,7 @@ const getDevServerMessages = (host: string, port: number, https: boolean, openPa
 
 export const createWebpackDevServerPartial = async (context: BuildContext, host = 'localhost') => {
     const {cwd, projectSettings: {devServer: {hot, port, openPage, https}}} = context;
-    const htmlPlugins = createHTMLPluginInstances({...context, isDefaultTarget: true});
+    const htmlPlugins = createHtmlPluginInstances({...context, isDefaultTarget: true});
     const messageOptions = {
         compilationSuccessInfo: {
             messages: getDevServerMessages(host, port, !!https?.client, openPage),
@@ -53,7 +55,7 @@ interface Options {
 }
 
 // 这个函数的实现暂时没有异步的逻辑，但对外暴露为异步接口给未来调整留空间
-export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, options: Options) => {
+export const createWebpackDevServerConfig = async (buildEntry: WebpackBuildEntry, options: Options) => {
     const {targetEntry, proxyDomain, extra = {}} = options;
     const {
         apiPrefixes,
@@ -62,6 +64,7 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
         https,
         port,
         hot,
+        customizeMiddleware,
     } = buildEntry.projectSettings.devServer;
     const proxyOptions = {
         https: https?.proxy ?? false,
@@ -104,8 +107,22 @@ export const createWebpackDevServerConfig = async (buildEntry: BuildEntry, optio
             type: https?.client ? 'https' : 'http',
             options: https?.client ? https.serverOptions : undefined,
         },
-        setupMiddlewares: middlewares => {
-            middlewares.unshift({name: 'open-in-editor', path: '/__open_in_editor__', middleware: launchInEditor()});
+        setupMiddlewares: (middlewares, server) => {
+            if (!server.app) {
+                throw new Error('Webpack dev server not launched');
+            }
+
+            const portal = createPortal();
+            buildEntry.projectSettings.portal.setup(portal, {router});
+            server.app.use('/__skr__', portal);
+
+            const before = createMiddlewareHook();
+            const after = createMiddlewareHook();
+            customizeMiddleware({before, after});
+            middlewares.unshift(...before.items());
+            middlewares.push(...after.items());
+            middlewares.unshift({path: '/__open_in_editor__', middleware: launchInEditor()});
+
             return middlewares;
         },
     };

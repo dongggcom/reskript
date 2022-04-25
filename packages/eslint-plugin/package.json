@@ -1,6 +1,6 @@
 {
   "name": "@reskript/eslint-plugin",
-  "version": "4.1.0",
+  "version": "5.2.0",
   "license": "MIT",
   "type": "commonjs",
   "main": "./index.js",
@@ -24,11 +24,11 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.12",
-    "@babel/eslint-parser": "^7.16.5",
+    "@babel/core": "^7.17.5",
+    "@babel/eslint-parser": "^7.17.0",
     "@babel/eslint-plugin": "^7.16.5",
-    "eslint": "^8.8.0",
-    "jest": "^27.4.5"
+    "eslint": "^8.10.0",
+    "jest": "^27.5.1"
   },
   "dependencies": {
     "builtins": "^4.0.0"
