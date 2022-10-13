@@ -1,6 +1,6 @@
 {
   "name": "@reskript/plugin-sass",
-  "version": "5.2.0",
+  "version": "5.7.2",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -24,18 +24,18 @@
     "test": "echo 'No test in @reskript/plugin-sass'"
   },
   "devDependencies": {
-    "@types/node": "^17.0.21",
+    "@types/node": "^18.8.3",
     "@types/sass": "^1.43.1",
-    "eslint": "^8.10.0",
+    "eslint": "^8.25.0",
     "typescript": "next",
-    "webpack": "^5.69.1"
+    "webpack": "^5.74.0"
   },
   "dependencies": {
-    "@reskript/core": "5.2.0",
-    "@reskript/plugin-utils": "5.2.0",
-    "@reskript/settings": "5.2.0",
-    "sass": "^1.49.9",
-    "sass-loader": "^12.6.0"
+    "@reskript/core": "5.7.2",
+    "@reskript/plugin-utils": "5.7.2",
+    "@reskript/settings": "5.7.2",
+    "sass": "^1.55.0",
+    "sass-loader": "^13.1.0"
   },
   "peerDependencies": {
     "webpack": "5.x"

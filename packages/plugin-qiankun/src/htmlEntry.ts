@@ -1,5 +1,4 @@
 import fs from 'node:fs/promises';
-// @ts-expect-error
 import dedent from 'dedent';
 import {Options, TemplateConfig, PlaceholderConfig} from './interface.js';
 
@@ -30,7 +29,7 @@ const defaultTemplate = (appName: string, config?: TemplateConfig) => {
 
     return dedent`
         <!DOCTYPE html>
-        <html>
+        <html dir="ltr">
         <head>
             <meta charset="utf-8">
             <title>${appName} - Qiankun</title>

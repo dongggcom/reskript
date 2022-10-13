@@ -1,7 +1,7 @@
 import path from 'node:path';
 import webpack, {StatsModule, StatsAsset} from 'webpack';
 import {dirFromImportMeta} from '@reskript/core';
-import {fillProjectSettings, PartialProjectSettings} from '@reskript/settings';
+import {fillProjectSettings, WebpackProjectSettings, WebpackUserSetting} from '@reskript/settings';
 import {createWebpackConfig} from '../index.js';
 import {BuildContext} from '../interface.js';
 
@@ -13,8 +13,9 @@ interface CompileResult {
     assets?: StatsAsset[];
 }
 
-export default async (entry: string, partialProjectSettings?: Omit<PartialProjectSettings, 'driver'>) => {
-    const projectSettings = fillProjectSettings({driver: 'webpack', ...partialProjectSettings});
+export default async (entry: string, partialProjectSettings?: WebpackUserSetting) => {
+    const settings = {driver: 'webpack' as const, ...partialProjectSettings};
+    const projectSettings = fillProjectSettings(settings) as WebpackProjectSettings;
     const context: BuildContext = {
         cwd: path.resolve(currentDirectory, 'fixtures'),
         mode: 'development',
@@ -41,7 +42,9 @@ export default async (entry: string, partialProjectSettings?: Omit<PartialProjec
     };
     Object.assign(context.projectSettings.build, {reportLintErrors: false});
     const config = await createWebpackConfig(context);
+    config.devtool = false;
     config.entry = path.join(currentDirectory, 'fixtures', entry);
+    config.target = 'node';
     config.output = {
         path: path.join(currentDirectory, 'output'),
         filename: 'bundle.js',

@@ -29,7 +29,21 @@ describe('constructProxyConfiguration', () => {
         const proxy = constructProxyConfiguration(options);
         expect(proxy['/foo']).toBeTruthy();
         expect(proxy['/foo'].target).toBe('http://app.me:8888');
-        expect(proxy['/foo'].pathRewrite['^/foo']).toBe('bar');
+        expect(proxy['/foo'].pathRewrite['^/foo']).toBe('/bar');
+        expect(proxy['/foo'].rewrite('/foo')).toBe('/bar');
+    });
+
+    test('rewrite with protocol', () => {
+        const options = {
+            https: false,
+            prefixes: [],
+            rewrite: {
+                '/foo': 'https://app.me:8888/bar',
+            },
+            targetDomain: 'app.me',
+        };
+        const proxy = constructProxyConfiguration(options);
+        expect(proxy['/foo'].target).toBe('https://app.me:8888');
     });
 
     test('agent', () => {

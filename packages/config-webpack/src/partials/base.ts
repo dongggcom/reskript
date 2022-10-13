@@ -151,9 +151,7 @@ const factory: ConfigurationFactory = async entry => {
         new ContextReplacementPlugin(/moment[\\/]locale$/, /^\.\/(en|zh-cn)$/),
         new DefinePlugin(constructDynamicDefines(defines)),
         new InterpolateHTMLPlugin(process.env),
-        // @ts-expect-error
         reportLintErrors && usage === 'build' && new ESLintPlugin(eslintOptions),
-        // @ts-expect-error
         reportLintErrors && usage === 'build' && new StyleLintPlugin(styleLintOptions),
     ];
 

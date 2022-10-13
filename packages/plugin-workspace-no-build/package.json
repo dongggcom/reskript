@@ -1,6 +1,6 @@
 {
   "name": "@reskript/plugin-workspace-no-build",
-  "version": "5.2.0",
+  "version": "5.7.2",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -24,16 +24,16 @@
     "test": "echo 'No test in @reskript/plugin-workspace-no-build'"
   },
   "devDependencies": {
-    "@types/node": "^17.0.21",
-    "@types/semver": "^7.3.9",
-    "eslint": "^8.10.0",
+    "@types/node": "^18.8.3",
+    "@types/semver": "^7.3.12",
+    "eslint": "^8.25.0",
     "typescript": "next",
-    "webpack": "^5.69.1"
+    "webpack": "^5.74.0"
   },
   "dependencies": {
-    "@reskript/core": "5.2.0",
-    "@reskript/settings": "5.2.0",
-    "semver": "^7.3.5"
+    "@reskript/core": "5.7.2",
+    "@reskript/settings": "5.7.2",
+    "semver": "^7.3.8"
   },
   "peerDependencies": {
     "webpack": "5.x"

@@ -261,7 +261,18 @@ const schema: any = {
             anyOf: [
                 {
                     items: {
-                        instanceof: 'Function',
+                        anyOf: [
+                            // 这个递归嵌套其实不完全，但够用了
+                            {
+                                items: {
+                                    instanceof: 'Function',
+                                },
+                                type: 'array',
+                            },
+                            {
+                                instanceof: 'Function',
+                            },
+                        ],
                     },
                     type: 'array',
                 },

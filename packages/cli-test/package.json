@@ -1,6 +1,6 @@
 {
   "name": "@reskript/cli-test",
-  "version": "5.2.0",
+  "version": "5.7.2",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
@@ -24,15 +24,15 @@
     "test": "echo 'No test in @reskript/cli-test'"
   },
   "devDependencies": {
-    "@types/node": "^17.0.21",
-    "@types/ramda": "^0.28.0",
-    "eslint": "^8.10.0",
+    "@types/node": "^18.8.3",
+    "@types/ramda": "^0.28.15",
+    "eslint": "^8.25.0",
     "typescript": "next"
   },
   "dependencies": {
-    "@reskript/config-jest": "5.2.0",
-    "@reskript/core": "5.2.0",
-    "@reskript/settings": "5.2.0",
+    "@reskript/config-jest": "5.7.2",
+    "@reskript/core": "5.7.2",
+    "@reskript/settings": "5.7.2",
     "jest-cli": "^27.5.1",
     "ramda": "^0.28.0"
   },

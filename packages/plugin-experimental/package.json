@@ -1,0 +1,68 @@
+{
+  "name": "@reskript/plugin-experimental",
+  "version": "5.7.2",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "engines": {
+    "node": ">=14.18.0 || >= 16.0.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "tsc -p tsconfig.build.json",
+    "lint": "eslint --max-warnings=0 src",
+    "test": "echo 'No test in @reskript/plugin-inject-html'"
+  },
+  "devDependencies": {
+    "@types/node": "^18.8.3",
+    "antd": "^4.23.4",
+    "eslint": "^8.25.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "next",
+    "webpack": "^5.74.0"
+  },
+  "dependencies": {
+    "@reskript/build-utils": "5.7.2",
+    "@reskript/core": "5.7.2",
+    "@reskript/plugin-utils": "5.7.2",
+    "@reskript/settings": "5.7.2",
+    "@swc/core": "^1.3.6",
+    "@swc/helpers": "^0.4.12",
+    "loader-of-loader": "^1.0.3",
+    "terser-webpack-plugin": "^5.3.6"
+  },
+  "optionalDependencies": {
+    "@next/swc-android-arm-eabi": "12.2.2",
+    "@next/swc-android-arm64": "12.2.2",
+    "@next/swc-darwin-arm64": "12.2.2",
+    "@next/swc-darwin-x64": "12.2.2",
+    "@next/swc-freebsd-x64": "12.2.2",
+    "@next/swc-linux-arm-gnueabihf": "12.2.2",
+    "@next/swc-linux-arm64-gnu": "12.2.2",
+    "@next/swc-linux-arm64-musl": "12.2.2",
+    "@next/swc-linux-x64-gnu": "12.2.2",
+    "@next/swc-linux-x64-musl": "12.2.2",
+    "@next/swc-win32-arm64-msvc": "12.2.2",
+    "@next/swc-win32-ia32-msvc": "12.2.2",
+    "@next/swc-win32-x64-msvc": "12.2.2"
+  },
+  "peerDependencies": {
+    "antd": "4.x"
+  },
+  "peerDependenciesMeta": {
+    "antd": {
+      "optional": true
+    }
+  }
+}
